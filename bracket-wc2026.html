@@ -31,8 +31,8 @@
 #wc2026 .wc-grp{border:2px solid #e9ecef;border-radius:8px;overflow:hidden;transition:border-color .3s}
 #wc2026 .wc-grp.wc-complete{border-color:#66bb6a}
 #wc2026 .wc-grp-hdr{background:#1a1a2e;color:#fff;text-align:center;padding:5px 0;font-size:11px;font-weight:700;letter-spacing:1px;position:relative}
-#wc2026 .wc-grp-reset{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:50%;width:20px;height:20px;font-size:13px;line-height:18px;padding:0;cursor:pointer;opacity:.6;transition:opacity .2s}
-#wc2026 .wc-grp-reset:hover{opacity:1;background:rgba(255,255,255,.15)}
+#wc2026 .wc-grp-reset{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:#c0392b;border:none;color:#fff;border-radius:50%;width:18px;height:18px;font-size:11px;line-height:18px;padding:0;cursor:pointer;opacity:.85;transition:opacity .2s,background .2s}
+#wc2026 .wc-grp-reset:hover{opacity:1;background:#e74c3c}
 #wc2026 .wc-grp-team{display:flex;align-items:center;gap:6px;padding:5px 8px;font-size:11px;border-bottom:1px solid #f5f5f5;cursor:pointer;transition:background .15s;position:relative;user-select:none}
 #wc2026 .wc-grp-team:last-child{border-bottom:none}
 #wc2026 .wc-grp-team:hover{background:#f0f7ff}
@@ -406,7 +406,7 @@ for(var g in G){
 var ranked=groupRanks[g]||[];
 var isComplete=ranked.length===4;
 h+='<div class="wc-grp'+(isComplete?' wc-complete':'')+'">';
-h+='<div class="wc-grp-hdr">GROUPE '+g+(ranked.length>0?'<button class="wc-grp-reset" data-grp="'+g+'" title="R\u00e9initialiser le groupe '+g+'">&#x21bb;</button>':'')+'</div>';
+h+='<div class="wc-grp-hdr">GROUPE '+g+(ranked.length>0?'<button class="wc-grp-reset" data-grp="'+g+'" title="R\u00e9initialiser le groupe '+g+'">&times;</button>':'')+'</div>';
 G[g].forEach(function(code){
 var t=T[code];
 var rankIdx=ranked.indexOf(code);
