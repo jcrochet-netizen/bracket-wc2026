@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coupe du Monde FIFA 2026 - Bracket Interactif</title>
+</head>
+<body style="margin:0;padding:0;background:#fff;font-family:Arial,sans-serif;">
+
+<!-- START WORDPRESS EMBED -->
+<div id="wc2026">
+<style>
+#wc2026{max-width:820px;margin:0 auto;background:#fff;font-family:'Segoe UI',Arial,Helvetica,sans-serif;color:#1a1a2e;line-height:1.4}
+#wc2026 *{box-sizing:border-box;margin:0;padding:0}
+#wc2026 .wc-hdr{border-radius:12px 12px 0 0;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#fff;text-align:center;padding:24px 16px 18px}
+#wc2026 .wc-hdr h1{font-size:22px;font-weight:800;letter-spacing:1px;margin-bottom:4px}
+#wc2026 .wc-hdr h1 span{color:#e2b714}
+#wc2026 .wc-hdr p{font-size:12px;opacity:.75;margin-top:6px}
+#wc2026 .wc-toolbar{display:flex;justify-content:center;gap:12px;padding:10px 16px;background:#f8f9fa;border-bottom:1px solid #e9ecef}
+#wc2026 .wc-btn{padding:6px 16px;border:1px solid #dee2e6;border-radius:20px;background:#fff;color:#495057;font-size:11px;cursor:pointer;font-weight:600;transition:all .2s}
+#wc2026 .wc-btn:hover{background:#e3f2fd;border-color:#90caf9;color:#1565c0}
+#wc2026 .wc-progress{font-size:11px;color:#6c757d;display:flex;align-items:center;gap:6px}
+#wc2026 .wc-progress-bar{width:100px;height:6px;background:#e9ecef;border-radius:3px;overflow:hidden}
+#wc2026 .wc-progress-fill{height:100%;background:linear-gradient(90deg,#e2b714,#f9a825);border-radius:3px;transition:width .3s}
+#wc2026 .wc-section{padding:12px 16px}
+#wc2026 .wc-section-title{font-size:14px;font-weight:700;color:#1a1a2e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+#wc2026 .wc-section-title::before{content:'';display:inline-block;width:4px;height:16px;background:#e2b714;border-radius:2px}
+#wc2026 .wc-groups{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:700px){#wc2026 .wc-groups{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:500px){#wc2026 .wc-groups{grid-template-columns:repeat(2,1fr)}}
+#wc2026 .wc-grp{border:2px solid #e9ecef;border-radius:8px;overflow:hidden;transition:border-color .3s}
+#wc2026 .wc-grp.wc-complete{border-color:#66bb6a}
+#wc2026 .wc-grp-hdr{background:#1a1a2e;color:#fff;text-align:center;padding:5px 0;font-size:11px;font-weight:700;letter-spacing:1px}
+#wc2026 .wc-grp-team{display:flex;align-items:center;gap:6px;padding:5px 8px;font-size:11px;border-bottom:1px solid #f5f5f5;cursor:pointer;transition:background .15s;position:relative;user-select:none}
+#wc2026 .wc-grp-team:last-child{border-bottom:none}
+#wc2026 .wc-grp-team:hover{background:#f0f7ff}
+#wc2026 .wc-grp-team.wc-playoff{color:#999;font-style:italic}
+#wc2026 .wc-grp-team .wc-rank-badge{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0}
+#wc2026 .wc-grp-team .wc-rank-badge.wc-r1{background:#e2b714}
+#wc2026 .wc-grp-team .wc-rank-badge.wc-r2{background:#aab7c4}
+#wc2026 .wc-grp-team .wc-rank-badge.wc-r3{background:#cd7f32}
+#wc2026 .wc-grp-team .wc-rank-badge.wc-r4{background:#dee2e6;color:#868e96}
+#wc2026 .wc-grp-team .wc-rank-empty{width:18px;height:18px;border-radius:50%;border:2px dashed #dee2e6;flex-shrink:0}
+#wc2026 .wc-grp-team.wc-ranked-1{background:#fffde7}
+#wc2026 .wc-grp-team.wc-ranked-2{background:#f5f5f5}
+#wc2026 .wc-grp-team.wc-ranked-3{background:#fff3e0}
+#wc2026 .wc-grp-team.wc-ranked-4{background:#fafafa;opacity:.55}
+#wc2026 .wc-flag{width:20px;height:14px;object-fit:cover;border-radius:2px;flex-shrink:0;border:1px solid #eee}
+#wc2026 .wc-flag-tbd{width:20px;height:14px;background:#e9ecef;border-radius:2px;flex-shrink:0;display:inline-block}
+#wc2026 .wc-divider{height:1px;background:#e9ecef;margin:4px 16px}
+/* Best 3rd section */
+#wc2026 .wc-best3-section{padding:12px 16px}
+#wc2026 .wc-best3-section.wc-hidden{display:none}
+#wc2026 .wc-best3-info{font-size:11px;color:#6c757d;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+#wc2026 .wc-best3-counter{font-weight:700;color:#1a1a2e;background:#e3f2fd;padding:2px 10px;border-radius:12px;font-size:11px}
+#wc2026 .wc-best3-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+@media(max-width:700px){#wc2026 .wc-best3-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:500px){#wc2026 .wc-best3-grid{grid-template-columns:repeat(2,1fr)}}
+#wc2026 .wc-b3-card{display:flex;align-items:center;gap:6px;padding:7px 10px;border:2px solid #e9ecef;border-radius:8px;cursor:pointer;transition:all .2s;font-size:11px;user-select:none}
+#wc2026 .wc-b3-card:hover{border-color:#90caf9;background:#f0f7ff}
+#wc2026 .wc-b3-card.wc-selected{border-color:#66bb6a;background:#e8f5e9;font-weight:700}
+#wc2026 .wc-b3-card.wc-disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+#wc2026 .wc-b3-card .wc-b3-grp{font-size:9px;color:#adb5bd;font-weight:700;margin-left:auto}
+#wc2026 .wc-b3-card.wc-selected .wc-b3-grp{color:#2e7d32}
+#wc2026 .wc-b3-check{width:16px;height:16px;border-radius:50%;border:2px solid #dee2e6;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .2s}
+#wc2026 .wc-b3-card.wc-selected .wc-b3-check{background:#66bb6a;border-color:#66bb6a;color:#fff}
+/* Bracket rounds */
+#wc2026 .wc-round{padding:12px 16px}
+#wc2026 .wc-round-title{font-size:13px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:8px;background:linear-gradient(90deg,#1a1a2e,#16213e);padding:8px 12px;border-radius:6px}
+#wc2026 .wc-round-title .wc-round-sub{font-weight:400;font-size:11px;opacity:.6;margin-left:auto}
+#wc2026 .wc-pairs{display:flex;flex-wrap:wrap;gap:10px}
+#wc2026 .wc-pair{flex:1 1 calc(50% - 10px);min-width:280px;display:flex;gap:6px;position:relative}
+#wc2026 .wc-pair::after{content:attr(data-feed);position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);font-size:9px;color:#adb5bd;white-space:nowrap;font-weight:600}
+@media(max-width:600px){#wc2026 .wc-pair{flex:1 1 100%}}
+#wc2026 .wc-match{flex:1;border:2px solid #e9ecef;border-radius:8px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+#wc2026 .wc-match.wc-decided{border-color:#90caf9}
+#wc2026 .wc-match-num{text-align:center;font-size:9px;color:#adb5bd;padding:2px 0;background:#fafafa;border-bottom:1px solid #f0f0f0;font-weight:600}
+#wc2026 .wc-slot{display:flex;align-items:center;gap:6px;padding:7px 8px;cursor:pointer;transition:all .15s;position:relative;min-height:30px}
+#wc2026 .wc-slot:first-of-type{border-bottom:1px solid #f0f0f0}
+#wc2026 .wc-slot:hover:not(.wc-empty){background:#f0f7ff}
+#wc2026 .wc-slot.wc-winner{background:#e3f2fd;font-weight:700}
+#wc2026 .wc-slot.wc-winner::after{content:'✓';position:absolute;right:6px;color:#1565c0;font-size:11px;font-weight:700}
+#wc2026 .wc-slot.wc-loser{background:#f8f9fa;opacity:.45}
+#wc2026 .wc-slot.wc-empty{cursor:default;background:#fafafa}
+#wc2026 .wc-slot .wc-tname{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#wc2026 .wc-slot .wc-tbd{font-size:11px;color:#ced4da;font-style:italic}
+#wc2026 .wc-champion{text-align:center;padding:20px 16px 28px;background:linear-gradient(180deg,#fff 0%,#fffde7 100%)}
+#wc2026 .wc-champion.wc-hidden{display:none}
+#wc2026 .wc-champion-trophy{font-size:48px;margin-bottom:8px}
+#wc2026 .wc-champion-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#adb5bd;margin-bottom:6px}
+#wc2026 .wc-champion-team{font-size:24px;font-weight:800;color:#1a1a2e;display:flex;align-items:center;justify-content:center;gap:10px}
+#wc2026 .wc-champion-team .wc-flag{width:36px;height:25px}
+#wc2026 .wc-sf-final{display:flex;gap:16px;padding:12px 16px;flex-wrap:wrap;justify-content:center}
+#wc2026 .wc-sf-block{flex:1;min-width:280px;max-width:380px}
+#wc2026 .wc-sf-block-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;text-align:center;color:#1a1a2e;padding:6px;background:#f8f9fa;border-radius:6px}
+#wc2026 .wc-sf-block-title.wc-gold{background:linear-gradient(90deg,#fff8e1,#fffde7);color:#f57f17}
+#wc2026 .wc-sf-match{border:2px solid #e9ecef;border-radius:8px;overflow:hidden}
+#wc2026 .wc-sf-match.wc-final-match{border-color:#e2b714;box-shadow:0 2px 8px rgba(226,183,20,.2)}
+#wc2026 .wc-sf-match.wc-decided{border-color:#90caf9}
+#wc2026 .wc-sf-match.wc-final-match.wc-decided{border-color:#e2b714}
+</style>
+
+<div class="wc-hdr">
+<h1>COUPE DU MONDE <span>FIFA 2026™</span></h1>
+<p>Canada · Mexique · États-Unis — 11 juin au 19 juillet 2026</p>
+<p style="margin-top:8px;font-size:11px">Classez chaque groupe, choisissez les meilleurs 3es, puis cliquez pour faire avancer les équipes</p>
+</div>
+
+<div class="wc-toolbar">
+<div class="wc-progress"><span id="wc-prog-text">0 / 32 matchs</span><div class="wc-progress-bar"><div class="wc-progress-fill" id="wc-prog-bar" style="width:0%"></div></div></div>
+<button class="wc-btn" onclick="WC.reset()">Réinitialiser</button>
+</div>
+
+<div id="wc-groups-section" class="wc-section">
+<div class="wc-section-title">Phase de groupes — Cliquez pour classer 1er, 2e, 3e, 4e</div>
+<div class="wc-groups" id="wc-groups"></div>
+</div>
+
+<div id="wc-best3-section" class="wc-best3-section wc-hidden">
+<div class="wc-section-title">Classement des meilleurs 3es</div>
+<div class="wc-best3-info">Sélectionnez les 8 équipes classées 3e qui se qualifient pour les seizièmes <span class="wc-best3-counter" id="wc-b3-count">0 / 8</span></div>
+<div class="wc-best3-grid" id="wc-best3-grid"></div>
+</div>
+
+<div class="wc-divider"></div>
+
+<div id="wc-bracket"></div>
+
+<div class="wc-champion wc-hidden" id="wc-champion">
+<div class="wc-champion-trophy">🏆</div>
+<div class="wc-champion-label">Champion du Monde 2026</div>
+<div class="wc-champion-team" id="wc-champion-team"></div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+var T={
+MEX:{n:"Mexique",f:"mx"},RSA:{n:"Afrique du Sud",f:"za"},KOR:{n:"Corée du Sud",f:"kr"},
+CAN:{n:"Canada",f:"ca"},SUI:{n:"Suisse",f:"ch"},QAT:{n:"Qatar",f:"qa"},
+BRA:{n:"Brésil",f:"br"},MAR:{n:"Maroc",f:"ma"},HAI:{n:"Haïti",f:"ht"},SCO:{n:"Écosse",f:"gb-sct"},
+USA:{n:"États-Unis",f:"us"},PAR:{n:"Paraguay",f:"py"},AUS:{n:"Australie",f:"au"},
+GER:{n:"Allemagne",f:"de"},CUW:{n:"Curaçao",f:"cw"},CIV:{n:"Côte d'Ivoire",f:"ci"},ECU:{n:"Équateur",f:"ec"},
+NED:{n:"Pays-Bas",f:"nl"},JPN:{n:"Japon",f:"jp"},TUN:{n:"Tunisie",f:"tn"},
+BEL:{n:"Belgique",f:"be"},EGY:{n:"Égypte",f:"eg"},IRN:{n:"Iran",f:"ir"},NZL:{n:"Nlle-Zélande",f:"nz"},
+ESP:{n:"Espagne",f:"es"},CPV:{n:"Cabo Verde",f:"cv"},KSA:{n:"Arabie Saoudite",f:"sa"},URU:{n:"Uruguay",f:"uy"},
+FRA:{n:"France",f:"fr"},SEN:{n:"Sénégal",f:"sn"},NOR:{n:"Norvège",f:"no"},
+ARG:{n:"Argentine",f:"ar"},ALG:{n:"Algérie",f:"dz"},AUT:{n:"Autriche",f:"at"},JOR:{n:"Jordanie",f:"jo"},
+POR:{n:"Portugal",f:"pt"},UZB:{n:"Ouzbékistan",f:"uz"},COL:{n:"Colombie",f:"co"},
+ENG:{n:"Angleterre",f:"gb-eng"},CRO:{n:"Croatie",f:"hr"},GHA:{n:"Ghana",f:"gh"},PAN:{n:"Panama",f:"pa"},
+PLA:{n:"Barrage A",f:null,playoff:true},PLB:{n:"Barrage B",f:null,playoff:true},
+PLC:{n:"Barrage C",f:null,playoff:true},PLD:{n:"Barrage D",f:null,playoff:true},
+PL1:{n:"Barrage IC1",f:null,playoff:true},PL2:{n:"Barrage IC2",f:null,playoff:true}
+};
+
+var G={
+A:["MEX","RSA","KOR","PLD"],B:["CAN","SUI","QAT","PLA"],C:["BRA","MAR","HAI","SCO"],
+D:["USA","PAR","AUS","PLC"],E:["GER","CUW","CIV","ECU"],F:["NED","JPN","TUN","PLB"],
+G:["BEL","EGY","IRN","NZL"],H:["ESP","CPV","KSA","URU"],I:["FRA","SEN","NOR","PL2"],
+J:["ARG","ALG","AUT","JOR"],K:["POR","UZB","COL","PL1"],L:["ENG","CRO","GHA","PAN"]
+};
+
+/* R32 structure: position-based. 'p' = position type: '1X'=1st group X, '2X'=2nd, '3X'=3rd slot */
+var R32_STRUCT={
+49:{d:'1A vs 3e',pa:'1A',pb:'3',pbSlot:0},
+50:{d:'1B vs 3e',pa:'1B',pb:'3',pbSlot:1},
+51:{d:'2E vs 2F',pa:'2E',pb:'2F'},
+52:{d:'1C vs 3e',pa:'1C',pb:'3',pbSlot:2},
+53:{d:'1D vs 3e',pa:'1D',pb:'3',pbSlot:3},
+54:{d:'2A vs 2B',pa:'2A',pb:'2B'},
+55:{d:'1E vs 2D',pa:'1E',pb:'2D'},
+56:{d:'1F vs 2C',pa:'1F',pb:'2C'},
+57:{d:'1G vs 3e',pa:'1G',pb:'3',pbSlot:4},
+58:{d:'1H vs 3e',pa:'1H',pb:'3',pbSlot:5},
+59:{d:'2K vs 2L',pa:'2K',pb:'2L'},
+60:{d:'1I vs 3e',pa:'1I',pb:'3',pbSlot:6},
+61:{d:'1J vs 3e',pa:'1J',pb:'3',pbSlot:7},
+62:{d:'2G vs 2H',pa:'2G',pb:'2H'},
+63:{d:'1K vs 2J',pa:'1K',pb:'2J'},
+64:{d:'1L vs 2I',pa:'1L',pb:'2I'}
+};
+
+/* 3rd place slot eligibility: 3rd can face any group winner except their own group */
+var THIRD_ELIGIBLE=[
+['B','C','D','E','F','G','H','I','J','K','L'],  // slot 0 → M49 (vs 1A, not A)
+['A','C','D','E','F','G','H','I','J','K','L'],  // slot 1 → M50 (vs 1B, not B)
+['A','B','D','E','F','G','H','I','J','K','L'],  // slot 2 → M52 (vs 1C, not C)
+['A','B','C','E','F','G','H','I','J','K','L'],  // slot 3 → M53 (vs 1D, not D)
+['A','B','C','D','E','F','H','I','J','K','L'],  // slot 4 → M57 (vs 1G, not G)
+['A','B','C','D','E','F','G','I','J','K','L'],  // slot 5 → M58 (vs 1H, not H)
+['A','B','C','D','E','F','G','H','J','K','L'],  // slot 6 → M60 (vs 1I, not I)
+['A','B','C','D','E','F','G','H','I','K','L']   // slot 7 → M61 (vs 1J, not J)
+];
+
+/* Later rounds feed structure */
+var M_FEED={
+65:{r:'r16',fa:{m:49,s:'w'},fb:{m:50,s:'w'}},66:{r:'r16',fa:{m:51,s:'w'},fb:{m:52,s:'w'}},
+67:{r:'r16',fa:{m:53,s:'w'},fb:{m:54,s:'w'}},68:{r:'r16',fa:{m:55,s:'w'},fb:{m:56,s:'w'}},
+69:{r:'r16',fa:{m:57,s:'w'},fb:{m:58,s:'w'}},70:{r:'r16',fa:{m:59,s:'w'},fb:{m:60,s:'w'}},
+71:{r:'r16',fa:{m:61,s:'w'},fb:{m:62,s:'w'}},72:{r:'r16',fa:{m:63,s:'w'},fb:{m:64,s:'w'}},
+73:{r:'qf',fa:{m:65,s:'w'},fb:{m:66,s:'w'}},74:{r:'qf',fa:{m:67,s:'w'},fb:{m:68,s:'w'}},
+75:{r:'qf',fa:{m:69,s:'w'},fb:{m:70,s:'w'}},76:{r:'qf',fa:{m:71,s:'w'},fb:{m:72,s:'w'}},
+77:{r:'sf',fa:{m:73,s:'w'},fb:{m:74,s:'w'}},78:{r:'sf',fa:{m:75,s:'w'},fb:{m:76,s:'w'}},
+79:{r:'third',fa:{m:77,s:'l'},fb:{m:78,s:'l'}},
+80:{r:'final',fa:{m:77,s:'w'},fb:{m:78,s:'w'}}
+};
+
+var ROUNDS=[
+{key:'r32',label:'Seizièmes de finale',sub:'32 équipes · 16 matchs',
+ pairs:[[49,50],[51,52],[53,54],[55,56],[57,58],[59,60],[61,62],[63,64]],
+ feeds:['→ 8e #1','→ 8e #2','→ 8e #3','→ 8e #4','→ 8e #5','→ 8e #6','→ 8e #7','→ 8e #8']},
+{key:'r16',label:'Huitièmes de finale',sub:'16 équipes · 8 matchs',
+ pairs:[[65,66],[67,68],[69,70],[71,72]],
+ feeds:['→ QF #1','→ QF #2','→ QF #3','→ QF #4']},
+{key:'qf',label:'Quarts de finale',sub:'8 équipes · 4 matchs',
+ pairs:[[73,74],[75,76]],
+ feeds:['→ Demi #1','→ Demi #2']}
+];
+
+/* ============ STATE ============ */
+var groupRanks={}; // { A: ['MEX','KOR','RSA','PLD'], ... } ordered by rank
+var best3={}; // Set-like object { A: true, C: true, ... } — groups whose 3rd qualifies
+var thirdAlloc={}; // { slotIndex: groupLetter } — allocation result
+var winners={}; // { matchId: teamCode }
+
+/* ============ HELPERS ============ */
+function flag(iso){
+if(!iso) return '<div class="wc-flag-tbd"></div>';
+return '<img src="https://flagcdn.com/w40/'+iso+'.png" width="20" height="14" class="wc-flag" alt="" loading="lazy" onerror="this.style.display=\'none\'">';
+}
+function teamHTML(code){
+if(!code) return '<span class="wc-tbd">À déterminer</span>';
+var t=T[code];
+return flag(t.f)+'<span class="wc-tname">'+t.n+'</span>';
+}
+function allGroupsRanked(){
+var keys=Object.keys(G);
+for(var i=0;i<keys.length;i++){
+if(!groupRanks[keys[i]]||groupRanks[keys[i]].length<4) return false;
+}
+return true;
+}
+function best3Count(){var c=0;for(var k in best3)if(best3[k])c++;return c;}
+
+/* ============ 3rd PLACE ALLOCATION ============ */
+function allocateThirds(){
+thirdAlloc={};
+var selected=[];
+for(var k in best3) if(best3[k]) selected.push(k);
+selected.sort();
+if(selected.length!==8) return false;
+// Backtracking allocation
+var assignment=new Array(8);
+function solve(idx){
+if(idx===8) return true;
+var eligible=THIRD_ELIGIBLE[idx];
+for(var i=0;i<selected.length;i++){
+var grp=selected[i];
+if(eligible.indexOf(grp)===-1) continue;
+// Check not already assigned
+var used=false;
+for(var j=0;j<idx;j++) if(assignment[j]===grp){used=true;break;}
+if(used) continue;
+assignment[idx]=grp;
+if(solve(idx+1)) return true;
+}
+assignment[idx]=undefined;
+return false;
+}
+if(!solve(0)) return false;
+for(var s=0;s<8;s++) thirdAlloc[s]=assignment[s];
+return true;
+}
+
+/* ============ RESOLVE R32 TEAMS ============ */
+function resolvePos(pos){
+// pos like '1A', '2F', etc.
+var rank=parseInt(pos[0])-1; // 0-indexed
+var grp=pos[1];
+if(!groupRanks[grp]||groupRanks[grp].length<4) return null;
+return groupRanks[grp][rank];
+}
+
+function getR32Team(mid,slot){
+var s=R32_STRUCT[mid];
+if(!s) return null;
+var pos=(slot==='a')?s.pa:s.pb;
+if(pos==='3'){
+// 3rd place slot
+var slotIdx=(slot==='a')?s.paSlot:s.pbSlot;
+if(slotIdx===undefined) slotIdx=s.pbSlot;
+var grp=thirdAlloc[slotIdx];
+if(!grp) return null;
+if(!groupRanks[grp]||groupRanks[grp].length<4) return null;
+return groupRanks[grp][2]; // 3rd = index 2
+}
+return resolvePos(pos);
+}
+
+/* ============ GET TEAM FOR ANY MATCH ============ */
+function getTeam(mid,slot){
+// R32
+if(R32_STRUCT[mid]) return getR32Team(mid,slot);
+// Later rounds
+var m=M_FEED[mid];
+if(!m) return null;
+var feed=(slot==='a')?m.fa:m.fb;
+if(!feed) return null;
+var w=winners[feed.m];
+if(!w) return null;
+if(feed.s==='w') return w;
+// loser
+var ta=getTeam(feed.m,'a'),tb=getTeam(feed.m,'b');
+return w===ta?tb:ta;
+}
+
+/* ============ BRACKET LOGIC ============ */
+function clearDown(mid){
+var allIds=Object.keys(M_FEED);
+// Also check R32 ids
+for(var i=49;i<=64;i++) allIds.push(String(i));
+for(var j=0;j<allIds.length;j++){
+var id=allIds[j];
+var m=M_FEED[id];
+if(!m) continue;
+if((m.fa&&m.fa.m==mid)||(m.fb&&m.fb.m==mid)){
+if(winners[id]){delete winners[id];clearDown(id);}
+}
+}
+}
+
+function clearAllKnockout(){
+winners={};
+}
+
+function selectWinner(mid,team){
+if(winners[mid]===team){delete winners[mid];clearDown(mid);}
+else{if(winners[mid])clearDown(mid);winners[mid]=team;}
+render();
+}
+
+function countDecided(){var c=0;for(var id in winners)c++;return c;}
+
+/* ============ GROUP RANKING ============ */
+function toggleGroupRank(grp,code){
+if(!groupRanks[grp]) groupRanks[grp]=[];
+var arr=groupRanks[grp];
+var idx=arr.indexOf(code);
+if(idx!==-1){
+// Remove this team and all after it
+arr.splice(idx);
+// Reset downstream: best3 for this group, and knockout
+if(best3[grp]){delete best3[grp];clearAllKnockout();thirdAlloc={};}
+clearAllKnockout();
+} else if(arr.length<4){
+arr.push(code);
+// If we just completed the group and best3 had this group's old 3rd, recheck
+if(arr.length===4){
+// Group just completed - reset knockout since teams may have changed
+clearAllKnockout();
+if(best3[grp]){
+// Re-validate best3 allocation
+if(!allocateThirds()){delete best3[grp];thirdAlloc={};}
+}
+}
+}
+renderAll();
+}
+
+/* ============ BEST 3rd TOGGLE ============ */
+function toggleBest3(grp){
+if(best3[grp]){
+delete best3[grp];
+thirdAlloc={};
+clearAllKnockout();
+} else {
+if(best3Count()>=8) return;
+best3[grp]=true;
+if(best3Count()===8){
+if(!allocateThirds()){
+// Allocation impossible with this combo, revert
+delete best3[grp];
+thirdAlloc={};
+}
+}
+clearAllKnockout();
+}
+renderAll();
+}
+
+/* ============ RENDERING ============ */
+function renderGroups(){
+var el=document.getElementById('wc-groups');
+var h='';
+for(var g in G){
+var ranked=groupRanks[g]||[];
+var isComplete=ranked.length===4;
+h+='<div class="wc-grp'+(isComplete?' wc-complete':'')+'">';
+h+='<div class="wc-grp-hdr">GROUPE '+g+'</div>';
+G[g].forEach(function(code){
+var t=T[code];
+var rankIdx=ranked.indexOf(code);
+var rankNum=rankIdx+1; // 1-based, 0 if not ranked
+var rankCls=rankNum>0?' wc-ranked-'+rankNum:'';
+var playoffCls=(t.playoff&&rankNum===0)?' wc-playoff':'';
+h+='<div class="wc-grp-team'+rankCls+playoffCls+'" data-grp="'+g+'" data-code="'+code+'">';
+if(rankNum>0){
+h+='<div class="wc-rank-badge wc-r'+rankNum+'">'+rankNum+'</div>';
+} else {
+h+='<div class="wc-rank-empty"></div>';
+}
+h+=flag(t.f)+'<span>'+t.n+'</span>';
+h+='</div>';
+});
+h+='</div>';
+}
+el.innerHTML=h;
+// Attach click handlers
+el.querySelectorAll('.wc-grp-team').forEach(function(el){
+el.addEventListener('click',function(){
+toggleGroupRank(this.getAttribute('data-grp'),this.getAttribute('data-code'));
+});
+});
+}
+
+function renderBest3(){
+var section=document.getElementById('wc-best3-section');
+var grid=document.getElementById('wc-best3-grid');
+var counter=document.getElementById('wc-b3-count');
+if(!allGroupsRanked()){
+section.classList.add('wc-hidden');
+return;
+}
+section.classList.remove('wc-hidden');
+var count=best3Count();
+counter.textContent=count+' / 8';
+var h='';
+var keys=Object.keys(G);
+keys.forEach(function(g){
+var thirdCode=groupRanks[g][2]; // 3rd place team
+var t=T[thirdCode];
+var isSel=!!best3[g];
+var isDis=!isSel&&count>=8;
+h+='<div class="wc-b3-card'+(isSel?' wc-selected':'')+(isDis?' wc-disabled':'')+'" data-grp="'+g+'">';
+h+='<div class="wc-b3-check">'+(isSel?'✓':'')+'</div>';
+h+=flag(t.f)+'<span>'+t.n+'</span>';
+h+='<span class="wc-b3-grp">Gr. '+g+'</span>';
+h+='</div>';
+});
+grid.innerHTML=h;
+grid.querySelectorAll('.wc-b3-card:not(.wc-disabled)').forEach(function(el){
+el.addEventListener('click',function(){
+toggleBest3(this.getAttribute('data-grp'));
+});
+});
+}
+
+function renderMatch(mid){
+var ta=getTeam(mid,'a'),tb=getTeam(mid,'b');
+var w=winners[mid];
+var decided=!!w;
+var clsA='wc-slot',clsB='wc-slot';
+if(w){
+if(w===ta){clsA+=' wc-winner';clsB+=' wc-loser';}
+else{clsB+=' wc-winner';clsA+=' wc-loser';}
+}
+if(!ta)clsA+=' wc-empty';
+if(!tb)clsB+=' wc-empty';
+var desc=R32_STRUCT[mid]?R32_STRUCT[mid].d:('M'+mid);
+var html='<div class="wc-match'+(decided?' wc-decided':'')+'" data-mid="'+mid+'">';
+html+='<div class="wc-match-num">'+desc+'</div>';
+html+='<div class="'+clsA+'" data-mid="'+mid+'" data-team="'+(ta||'')+'" data-side="a">'+teamHTML(ta)+'</div>';
+html+='<div class="'+clsB+'" data-mid="'+mid+'" data-team="'+(tb||'')+'" data-side="b">'+teamHTML(tb)+'</div>';
+html+='</div>';
+return html;
+}
+
+function renderMatchInner(mid){
+var ta=getTeam(mid,'a'),tb=getTeam(mid,'b');
+var w=winners[mid];
+var clsA='wc-slot',clsB='wc-slot';
+if(w){
+if(w===ta){clsA+=' wc-winner';clsB+=' wc-loser';}
+else{clsB+=' wc-winner';clsA+=' wc-loser';}
+}
+if(!ta)clsA+=' wc-empty';
+if(!tb)clsB+=' wc-empty';
+return '<div class="'+clsA+'" data-mid="'+mid+'" data-team="'+(ta||'')+'" data-side="a">'+teamHTML(ta)+'</div>'+
+'<div class="'+clsB+'" data-mid="'+mid+'" data-team="'+(tb||'')+'" data-side="b">'+teamHTML(tb)+'</div>';
+}
+
+function renderBracket(){
+var el=document.getElementById('wc-bracket');
+var h='';
+ROUNDS.forEach(function(round){
+h+='<div class="wc-round">';
+h+='<div class="wc-round-title">'+round.label+'<span class="wc-round-sub">'+round.sub+'</span></div>';
+h+='<div class="wc-pairs" style="margin-bottom:20px;">';
+round.pairs.forEach(function(pair,i){
+h+='<div class="wc-pair" data-feed="'+round.feeds[i]+'">';
+pair.forEach(function(mid){h+=renderMatch(mid);});
+h+='</div>';
+});
+h+='</div></div>';
+});
+h+='<div class="wc-round">';
+h+='<div class="wc-round-title">Demi-finales<span class="wc-round-sub">4 équipes · 2 matchs</span></div>';
+h+='<div class="wc-pairs" style="margin-bottom:8px;">';
+h+='<div class="wc-pair" data-feed="">'+renderMatch(77)+'</div>';
+h+='<div class="wc-pair" data-feed="">'+renderMatch(78)+'</div>';
+h+='</div></div>';
+h+='<div class="wc-sf-final">';
+h+='<div class="wc-sf-block"><div class="wc-sf-block-title">Petite finale · 3e place</div>';
+h+='<div class="wc-sf-match'+(winners[79]?' wc-decided':'')+'">'+renderMatchInner(79)+'</div></div>';
+h+='<div class="wc-sf-block"><div class="wc-sf-block-title wc-gold">★ Finale · 19 juillet 2026</div>';
+h+='<div class="wc-sf-match wc-final-match'+(winners[80]?' wc-decided':'')+'">'+renderMatchInner(80)+'</div></div>';
+h+='</div>';
+el.innerHTML=h;
+el.querySelectorAll('.wc-slot:not(.wc-empty)').forEach(function(slot){
+slot.addEventListener('click',function(){
+var mid=parseInt(this.getAttribute('data-mid'));
+var team=this.getAttribute('data-team');
+if(team)selectWinner(mid,team);
+});
+});
+}
+
+function renderChampion(){
+var el=document.getElementById('wc-champion');
+var teamEl=document.getElementById('wc-champion-team');
+var w=winners[80];
+if(w){
+var t=T[w];
+el.classList.remove('wc-hidden');
+teamEl.innerHTML=flag(t.f).replace('width="20" height="14"','width="36" height="25"')+' '+t.n;
+}else{
+el.classList.add('wc-hidden');
+}
+}
+
+function updateProgress(){
+var c=countDecided();
+document.getElementById('wc-prog-text').textContent=c+' / 32 matchs';
+document.getElementById('wc-prog-bar').style.width=Math.round(c/32*100)+'%';
+}
+
+function render(){
+renderBracket();
+renderChampion();
+updateProgress();
+}
+
+function renderAll(){
+renderGroups();
+renderBest3();
+render();
+}
+
+function reset(){
+groupRanks={};best3={};thirdAlloc={};winners={};
+renderAll();
+}
+
+/* Init */
+renderAll();
+
+window.WC={select:selectWinner,reset:reset};
+
+/* Auto-resize for iframe embedding */
+function postHeight(){
+try{window.parent.postMessage({type:'wc2026-resize',height:document.getElementById('wc2026').scrollHeight},'*');}catch(e){}
+}
+var _ro=new ResizeObserver(postHeight);
+_ro.observe(document.getElementById('wc2026'));
+postHeight();
+})();
+</script>
+</div>
+<!-- END WORDPRESS EMBED -->
+
+</body>
+</html>
