@@ -221,7 +221,8 @@ var ROUNDS=[
 ];
 
 /* ============ STATE ============ */
-var groupRanks={}; // { A: ['MEX','KOR','RSA','PLD'], ... } ordered by rank
+// Pre-fill all groups with default ranking (order as listed) so bracket is immediately playable
+var groupRanks=(function(){var r={};for(var g in G)r[g]=G[g].slice();return r;})();
 var best3={}; // Set-like object { A: true, C: true, ... } — groups whose 3rd qualifies
 var thirdAlloc={}; // { slotIndex: groupLetter } — allocation result
 var winners={}; // { matchId: teamCode }
@@ -548,7 +549,7 @@ var isL=wm&&code&&code!==wm&&(wm===ta||wm===tb);
 var bg=isW?'#dbeafe':isL?'#f9fafb':'transparent';
 var fg=isW?'#1e40af':isL?'#9ca3af':'#222';
 var op=isL?'.4':'1',fw=isW?'bold':'normal';
-var oc=code?'WC.fwd('+mid+',"'+code+'")':'';
+var oc=code?"WC.fwd("+mid+",'"+code+"')":'';  // single quotes to avoid breaking HTML attribute
 var sh=t?t.s:'?';var y=ty(yi);
 var str='<g class="wc-tr" onclick="'+oc+'" style="cursor:'+(code?'pointer':'default')+';opacity:'+op+'">';
 if(side==='L'){
@@ -648,7 +649,8 @@ render();
 }
 
 function reset(){
-groupRanks={};best3={};thirdAlloc={};winners={};
+groupRanks=(function(){var r={};for(var g in G)r[g]=G[g].slice();return r;})();
+best3={};thirdAlloc={};winners={};
 renderAll();
 }
 
