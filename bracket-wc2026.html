@@ -516,9 +516,9 @@ return '<div class="'+clsA+'" data-mid="'+mid+'" data-team="'+(ta||'')+'" data-s
 function renderBracket(){
 var el=document.getElementById('wc-bracket');
 var BH=752,BW=820,SL=47;
-var TW=140,CR=13,FCR=19;
-var LR16=240,LQF=310,LSF=375,CTR=410;
-var RSF=445,RQF=510,RR16=580,RTW=680;
+var TW=108,CR=13,FCR=19;
+var LR32=170,LR16=248,LQF=315,LSF=375,CTR=410;
+var RSF=445,RQF=505,RR16=572,RR32=650,RTW=712;
 var LC='#c0cdd8',LD='4 3';
 function ty(i){return(i+0.5)*SL;}
 function r32y(i){return(2*i+1)*SL;}
@@ -542,15 +542,13 @@ str+='</g>';return str;
 }
 function tRow(mid,slot,yi,side){
 var code=getTeam(mid,slot),t=code?T[code]:null;
-var wm=winners[mid]; // who currently won this 1/16 match
-var isW=code&&code===wm;
-var isL=wm&&code&&code!==wm;
+var wm=winners[mid];
+var isW=code&&code===wm,isL=wm&&code&&code!==wm;
 var bg=isW?'#dbeafe':isL?'#f9fafb':'transparent';
 var fg=isW?'#1e40af':isL?'#9ca3af':'#222';
 var op=isL?'.4':'1',fw=isW?'bold':'normal';
-// 1st click = select as winner; 2nd click on winner = advance to next round
-var oc=code?(isW?"WC.advance("+mid+")":"WC.selectWinner("+mid+",'"+code+"')"):'';
-var sh=t?(t.playoff?t.s:code):'?'; // FIFA 3-letter code for real teams, label for playoffs
+var oc=code?"WC.selectWinner("+mid+",'"+code+"')":'';
+var sh=t?(t.playoff?t.s:code):'?';
 var y=ty(yi);
 var str='<g class="wc-tr" onclick="'+oc+'" style="cursor:'+(code?'pointer':'default')+';opacity:'+op+'">';
 if(side==='L'){
@@ -569,22 +567,24 @@ s+='<defs><style>.wc-tr:hover .wc-bg{fill:#e0efff}.wc-circ:hover circle{stroke:#
 s+='<rect width="'+BW+'" height="'+BH+'" fill="white"/>';
 // Separators between match pairs
 for(var i=1;i<8;i++){var yd=i*2*SL;s+=ln(0,yd,TW,yd,'#eeeff1','');s+=ln(RTW,yd,BW,yd,'#eeeff1','');}
-// Round labels
-var rls=[[TW/2,'1/16'],[LR16,'1/8'],[LQF,'1/4'],[LSF,'1/2'],[CTR,'FINALE'],[RSF,'1/2'],[RQF,'1/4'],[RR16,'1/8'],[BW-TW/2,'1/16']];
+// Round labels — aligned exactly over each circle column
+var rls=[[LR32,'1/16'],[LR16,'1/8'],[LQF,'1/4'],[LSF,'1/2'],[CTR,'FINALE'],[RSF,'1/2'],[RQF,'1/4'],[RR16,'1/8'],[RR32,'1/16']];
 rls.forEach(function(l){s+='<text x="'+l[0]+'" y="12" text-anchor="middle" font-size="9" fill="'+(l[1]==='FINALE'?'#e2b714':'#aaa')+'" font-weight="600">'+l[1]+'</text>';});
 // === LEFT LINES ===
-var xJ1=TW+22,xJ2=TW+52;
-for(var i=0;i<8;i++){var ya=ty(2*i),yb=ty(2*i+1),ym=r32y(i);s+=ln(TW,ya,xJ1,ya);s+=ln(TW,yb,xJ1,yb);s+=ln(xJ1,ya,xJ1,yb);s+=ln(xJ1,ym,xJ2,ym);}
-for(var i=0;i<4;i++){var ya=r32y(2*i),yb=r32y(2*i+1),ym=r16y(i);s+=ln(xJ2,ya,xJ2,yb);s+=ln(xJ2,ym,LR16-CR,ym);}
+var xJ1=136;
+for(var i=0;i<8;i++){var ya=ty(2*i),yb=ty(2*i+1),ym=r32y(i);s+=ln(TW,ya,xJ1,ya);s+=ln(TW,yb,xJ1,yb);s+=ln(xJ1,ya,xJ1,yb);s+=ln(xJ1,ym,LR32-CR,ym);}
+var xJ2=LR32+CR+15;
+for(var i=0;i<4;i++){var ya=r32y(2*i),yb=r32y(2*i+1),ym=r16y(i);s+=ln(LR32+CR,ya,xJ2,ya);s+=ln(LR32+CR,yb,xJ2,yb);s+=ln(xJ2,ya,xJ2,yb);s+=ln(xJ2,ym,LR16-CR,ym);}
 var xJ3=LR16+CR+15;
 for(var i=0;i<2;i++){var ya=r16y(2*i),yb=r16y(2*i+1),ym=qfy(i);s+=ln(LR16+CR,ya,xJ3,ya);s+=ln(LR16+CR,yb,xJ3,yb);s+=ln(xJ3,ya,xJ3,yb);s+=ln(xJ3,ym,LQF-CR,ym);}
 var xJ4=LQF+CR+18;
 s+=ln(LQF+CR,qfy(0),xJ4,qfy(0));s+=ln(LQF+CR,qfy(1),xJ4,qfy(1));s+=ln(xJ4,qfy(0),xJ4,qfy(1));s+=ln(xJ4,SFY,LSF-CR,SFY);
 s+=ln(LSF+CR,SFY,CTR-FCR,SFY,LC,'');
 // === RIGHT LINES ===
-var rxJ1=RTW-22,rxJ2=RTW-52;
-for(var i=0;i<8;i++){var ya=ty(2*i),yb=ty(2*i+1),ym=r32y(i);s+=ln(RTW,ya,rxJ1,ya);s+=ln(RTW,yb,rxJ1,yb);s+=ln(rxJ1,ya,rxJ1,yb);s+=ln(rxJ1,ym,rxJ2,ym);}
-for(var i=0;i<4;i++){var ya=r32y(2*i),yb=r32y(2*i+1),ym=r16y(i);s+=ln(rxJ2,ya,rxJ2,yb);s+=ln(rxJ2,ym,RR16+CR,ym);}
+var rxJ1=RTW-28;
+for(var i=0;i<8;i++){var ya=ty(2*i),yb=ty(2*i+1),ym=r32y(i);s+=ln(RTW,ya,rxJ1,ya);s+=ln(RTW,yb,rxJ1,yb);s+=ln(rxJ1,ya,rxJ1,yb);s+=ln(rxJ1,ym,RR32+CR,ym);}
+var rxJ2=RR32-CR-15;
+for(var i=0;i<4;i++){var ya=r32y(2*i),yb=r32y(2*i+1),ym=r16y(i);s+=ln(RR32-CR,ya,rxJ2,ya);s+=ln(RR32-CR,yb,rxJ2,yb);s+=ln(rxJ2,ya,rxJ2,yb);s+=ln(rxJ2,ym,RR16+CR,ym);}
 var rxJ3=RR16-CR-15;
 for(var i=0;i<2;i++){var ya=r16y(2*i),yb=r16y(2*i+1),ym=qfy(i);s+=ln(RR16-CR,ya,rxJ3,ya);s+=ln(RR16-CR,yb,rxJ3,yb);s+=ln(rxJ3,ya,rxJ3,yb);s+=ln(rxJ3,ym,RQF+CR,ym);}
 var rxJ4=RQF-CR-18;
@@ -593,7 +593,8 @@ s+=ln(RSF-CR,SFY,CTR+FCR,SFY,LC,'');
 // === TEAM LABELS ===
 for(var i=0;i<8;i++){var m=LM[i];s+=tRow(m,'a',2*i,'L');s+=tRow(m,'b',2*i+1,'L');}
 for(var i=0;i<8;i++){var m=RM[i];s+=tRow(m,'a',2*i,'R');s+=tRow(m,'b',2*i+1,'R');}
-// === CIRCLES (1/8, 1/4, 1/2 only — no 1/16 intermediate circles) ===
+// === CIRCLES: 1/16, 1/8, 1/4, 1/2 ===
+for(var i=0;i<8;i++){s+=circ(LR32,r32y(i),CR,LM[i],winners[LM[i]]);s+=circ(RR32,r32y(i),CR,RM[i],winners[RM[i]]);}
 for(var i=0;i<4;i++){s+=circ(LR16,r16y(i),CR,LM16[i],winners[LM16[i]]);s+=circ(RR16,r16y(i),CR,RM16[i],winners[RM16[i]]);}
 for(var i=0;i<2;i++){s+=circ(LQF,qfy(i),CR,LMQF[i],winners[LMQF[i]]);s+=circ(RQF,qfy(i),CR,RMQF[i],winners[RMQF[i]]);}
 s+=circ(LSF,SFY,CR,77,winners[77]);s+=circ(RSF,SFY,CR,78,winners[78]);
