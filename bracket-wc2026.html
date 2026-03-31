@@ -451,23 +451,21 @@ function renderBest3(){
 var section=document.getElementById('wc-best3-section');
 var grid=document.getElementById('wc-best3-grid');
 var counter=document.getElementById('wc-b3-count');
-if(!allGroupsRanked()){
-section.classList.add('wc-hidden');
-return;
-}
+// Always visible — show default 3rd if group not yet ranked
 section.classList.remove('wc-hidden');
 var count=best3Count();
 counter.textContent=count+' / 8';
 var h='';
 var keys=Object.keys(G);
 keys.forEach(function(g){
-var thirdCode=groupRanks[g][2]; // 3rd place team
+var ranked=groupRanks[g]&&groupRanks[g].length>=4;
+var thirdCode=ranked?groupRanks[g][2]:G[g][2]; // use ranked 3rd or default
 var t=T[thirdCode];
 var isSel=!!best3[g];
 var isDis=!isSel&&count>=8;
-h+='<div class="wc-b3-card'+(isSel?' wc-selected':'')+(isDis?' wc-disabled':'')+'" data-grp="'+g+'">';
+h+='<div class="wc-b3-card'+(isSel?' wc-selected':'')+(isDis?' wc-disabled':'')+'" data-grp="'+g+'" style="'+(ranked?'':'opacity:.6')+'">';
 h+='<div class="wc-b3-check">'+(isSel?'✓':'')+'</div>';
-h+=flag(t.f)+'<span>'+t.n+'</span>';
+h+=flag(t.f)+'<span>'+t.n+(ranked?'':'<em style="font-size:9px;color:#aaa;margin-left:3px">?</em>')+'</span>';
 h+='<span class="wc-b3-grp">Gr. '+g+'</span>';
 h+='</div>';
 });
