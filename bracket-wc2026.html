@@ -459,13 +459,14 @@ var h='';
 var keys=Object.keys(G);
 keys.forEach(function(g){
 var ranked=groupRanks[g]&&groupRanks[g].length>=4;
-var thirdCode=ranked?groupRanks[g][2]:G[g][2]; // use ranked 3rd or default
-var t=T[thirdCode];
+var thirdCode=ranked?groupRanks[g][2]:null;
+var t=thirdCode?T[thirdCode]:null;
 var isSel=!!best3[g];
-var isDis=!isSel&&count>=8;
-h+='<div class="wc-b3-card'+(isSel?' wc-selected':'')+(isDis?' wc-disabled':'')+'" data-grp="'+g+'" style="'+(ranked?'':'opacity:.6')+'">';
+var isDis=(!ranked)||(!isSel&&count>=8);
+h+='<div class="wc-b3-card'+(isSel?' wc-selected':'')+(isDis&&!isSel?' wc-disabled':'')+'" data-grp="'+g+'" style="'+(ranked?'':'opacity:.45;pointer-events:none')+'">';
 h+='<div class="wc-b3-check">'+(isSel?'✓':'')+'</div>';
-h+=flag(t.f)+'<span>'+t.n+(ranked?'':'<em style="font-size:9px;color:#aaa;margin-left:3px">?</em>')+'</span>';
+if(t&&t.f){h+=flag(t.f);}else{h+='<span class="wc-flag-tbd"></span>';}
+h+='<span>'+(t?t.n:'<em style="color:#bbb;font-style:italic">Groupe '+g+'</em>')+'</span>';
 h+='<span class="wc-b3-grp">Gr. '+g+'</span>';
 h+='</div>';
 });
