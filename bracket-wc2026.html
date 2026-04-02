@@ -567,7 +567,7 @@ s+='<rect width="'+BW+'" height="'+BH+'" fill="white"/>';
 // Separators between match pairs
 for(var i=1;i<8;i++){var yd=i*2*SL;s+=ln(0,yd,TW,yd,'#eeeff1','');s+=ln(RTW,yd,BW,yd,'#eeeff1','');}
 // Round labels — aligned exactly over each circle column
-var rls=[[LR32,'1/16'],[LR16,'1/8'],[LQF,'1/4'],[LSF,'1/2'],[CTR,'FINALE'],[RSF,'1/2'],[RQF,'1/4'],[RR16,'1/8'],[RR32,'1/16']];
+var rls=[[TW/2,'1/16'],[LR32,'1/8'],[LR16,'1/4'],[LQF,'1/2'],[CTR,'FINALE'],[RQF,'1/2'],[RR16,'1/4'],[RR32,'1/8'],[RTW+TW/2,'1/16']];
 rls.forEach(function(l){s+='<text x="'+l[0]+'" y="12" text-anchor="middle" font-size="9" fill="'+(l[1]==='FINALE'?'#e2b714':'#aaa')+'" font-weight="600">'+l[1]+'</text>';});
 // === LEFT LINES ===
 var xJ1=136;
