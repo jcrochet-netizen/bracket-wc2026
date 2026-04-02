@@ -680,8 +680,8 @@ el.classList.add('wc-hidden');
 
 function updateProgress(){
 var c=countDecided();
-document.getElementById('wc-prog-text').textContent=c+' / 32 matchs';
-document.getElementById('wc-prog-bar').style.width=Math.round(c/32*100)+'%';
+var pt=document.getElementById('wc-prog-text');if(pt)pt.textContent=c+' / 32 matchs';
+var pb=document.getElementById('wc-prog-bar');if(pb)pb.style.width=Math.round(c/32*100)+'%';
 }
 
 function render(){
