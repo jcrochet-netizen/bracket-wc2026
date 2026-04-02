@@ -102,6 +102,8 @@
 #wc2026 .wc-share-btn.wc-share-wa{background:#25d366;color:#fff}
 #wc2026 .wc-share-btn.wc-share-mail{background:#ea4335;color:#fff}
 #wc2026 .wc-share-icon{width:15px;height:15px;fill:currentColor;flex-shrink:0}
+#wc2026 .wc-share-btn.wc-share-dl{background:linear-gradient(135deg,#1a1a2e,#0f3460);color:#e2b714;margin-bottom:10px}
+#wc2026 .wc-share-dl-row{margin-bottom:10px}
 #wc2026 .wc-sf-final{display:flex;gap:16px;padding:12px 16px;flex-wrap:wrap;justify-content:center}
 #wc2026 .wc-sf-block{flex:1;min-width:280px;max-width:380px}
 #wc2026 .wc-sf-block-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;text-align:center;color:#1a1a2e;padding:6px;background:#f8f9fa;border-radius:6px}
@@ -146,6 +148,12 @@
 
 <div class="wc-share">
 <div class="wc-share-label">Partager mon pronostic</div>
+<div class="wc-share-dl-row">
+<button id="wc-dl-btn" class="wc-share-btn wc-share-dl" onclick="WC.downloadImage()">
+<svg class="wc-share-icon" viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 4h14v-2H5v2z"/></svg>
+Télécharger l'image du bracket
+</button>
+</div>
 <div class="wc-share-btns">
 <a id="wc-share-x" class="wc-share-btn wc-share-x" href="#" target="_blank" rel="noopener">
 <svg class="wc-share-icon" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -689,7 +697,73 @@ renderAll();
 /* Init */
 renderAll();
 
-window.WC={select:selectWinner,selectWinner:selectWinner,clickCircle:clickCircle,advance:advance,reset:reset};
+/* Download bracket as PNG image */
+async function downloadImage(){
+var btn=document.getElementById('wc-dl-btn');
+var origTxt=btn.innerHTML;
+btn.innerHTML='<svg class="wc-share-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg> Génération en cours…';
+btn.disabled=true;
+try{
+var svgEl=document.querySelector('#wc-bracket svg');
+if(!svgEl){alert('Le bracket n\'est pas encore disponible.');return;}
+var clone=svgEl.cloneNode(true);
+// Fetch all flag images and embed as data URLs
+var imgs=Array.from(clone.querySelectorAll('image'));
+await Promise.all(imgs.map(async function(img){
+var href=img.getAttribute('href')||img.getAttribute('xlink:href');
+if(!href||href.startsWith('data:'))return;
+try{
+var resp=await fetch(href);
+var blob=await resp.blob();
+var dataUrl=await new Promise(function(res){var fr=new FileReader();fr.onload=function(e){res(e.target.result);};fr.readAsDataURL(blob);});
+img.setAttribute('href',dataUrl);
+}catch(e){img.remove();}
+}));
+var vb=svgEl.viewBox.baseVal;
+var W=vb.width,H=vb.height;
+var PAD=16,HDR=48;
+var canvas=document.createElement('canvas');
+var DPR=2;
+canvas.width=(W+PAD*2)*DPR;
+canvas.height=(H+PAD*2+HDR)*DPR;
+var ctx=canvas.getContext('2d');
+ctx.scale(DPR,DPR);
+// Background
+ctx.fillStyle='#fff';
+ctx.fillRect(0,0,W+PAD*2,H+PAD*2+HDR);
+// Header
+var grad=ctx.createLinearGradient(0,0,W+PAD*2,0);
+grad.addColorStop(0,'#1a1a2e');grad.addColorStop(.5,'#16213e');grad.addColorStop(1,'#0f3460');
+ctx.fillStyle=grad;
+ctx.fillRect(0,0,W+PAD*2,HDR);
+ctx.font='bold 16px "Segoe UI",Arial,sans-serif';
+ctx.fillStyle='#fff';
+ctx.textAlign='center';
+ctx.textBaseline='middle';
+ctx.fillText('COUPE DU MONDE ',PAD+(W/2)-30,HDR/2);
+ctx.fillStyle='#e2b714';
+ctx.fillText('FIFA 2026™',PAD+(W/2)+62,HDR/2);
+// SVG bracket
+var serializer=new XMLSerializer();
+var svgStr=serializer.serializeToString(clone);
+var svgBlob=new Blob([svgStr],{type:'image/svg+xml;charset=utf-8'});
+var url=URL.createObjectURL(svgBlob);
+await new Promise(function(resolve,reject){
+var image=new Image();
+image.onload=function(){ctx.drawImage(image,PAD,PAD+HDR,W,H);URL.revokeObjectURL(url);resolve();};
+image.onerror=reject;
+image.src=url;
+});
+// Download
+var a=document.createElement('a');
+a.download='bracket-wc2026.png';
+a.href=canvas.toDataURL('image/png');
+a.click();
+}catch(e){alert('Erreur lors de la génération : '+e.message);}
+finally{btn.innerHTML=origTxt;btn.disabled=false;}
+}
+
+window.WC={select:selectWinner,selectWinner:selectWinner,clickCircle:clickCircle,advance:advance,reset:reset,downloadImage:downloadImage};
 
 /* Share buttons */
 (function(){
