@@ -739,14 +739,19 @@ ctx.scale(DPR,DPR);
 // White background
 ctx.fillStyle='#fff';
 ctx.fillRect(0,0,TW,H+PAD*2+HDR);
-// Fetch TM logo
+// Load TM logo from header img element
 var logoSize=52;
 var logoImg=null;
 try{
-var lresp=await fetch('https://media.topmercato.com/main/2026/04/Logo_TM_400x400px.png');
-var lblob=await lresp.blob();
-var lurl=await new Promise(function(res){var fr=new FileReader();fr.onload=function(e){res(e.target.result);};fr.readAsDataURL(lblob);});
-logoImg=await new Promise(function(res,rej){var i=new Image();i.onload=function(){res(i);};i.onerror=rej;i.src=lurl;});
+var hdrImg=document.querySelector('.wc-hdr-right img');
+var logoSrc=hdrImg?hdrImg.src:'';
+if(logoSrc){
+logoImg=await new Promise(function(res){
+var i=new Image();i.crossOrigin='anonymous';
+i.onload=function(){res(i);};i.onerror=function(){res(null);};
+i.src=logoSrc+'?cb='+Date.now();
+});
+}
 }catch(e){}
 // Draw header title: "COUPE DU MONDE " + "FIFA 2026™"
 ctx.textBaseline='middle';
