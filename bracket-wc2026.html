@@ -604,7 +604,7 @@ var bg=isW?'#dbeafe':isL?'#f9fafb':'transparent';
 var fg=isW?'#1e40af':isL?'#9ca3af':'#222';
 var op=isL?'.4':'1',fw=isW?'bold':'normal';
 var oc=code?"WC.selectWinner("+mid+",'"+code+"')":'';
-var sh=t?(t.playoff?t.s:code):'?';
+var sh=t?((/^PL/.test(code))?t.s:code):'?';
 var y=ty(yi);
 var str='<g class="wc-tr" onclick="'+oc+'" style="cursor:'+(code?'pointer':'default')+';opacity:'+op+'">';
 if(side==='L'){
