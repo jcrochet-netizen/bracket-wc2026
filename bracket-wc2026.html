@@ -116,6 +116,9 @@
 #wc2026 .wc-sf-match.wc-final-match{border-color:#e2b714;box-shadow:0 2px 8px rgba(226,183,20,.2)}
 #wc2026 .wc-sf-match.wc-decided{border-color:#90caf9}
 #wc2026 .wc-sf-match.wc-final-match.wc-decided{border-color:#e2b714}
+#wc2026 .wc-random-bar{text-align:center;padding:8px 16px;border-bottom:1px solid #f0f0f0}
+#wc2026 .wc-random-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 18px;border-radius:20px;font-size:12px;font-weight:700;background:#f3f4f6;color:#374151;border:1.5px dashed #9ca3af;cursor:pointer;transition:background .2s}
+#wc2026 .wc-random-btn:hover{background:#e5e7eb}
 </style>
 
 <div class="wc-hdr">
@@ -131,6 +134,13 @@
 <p class="wc-hdr-sub" style="font-size:14px;color:#000;font-style:italic">Classez chaque groupe, choisissez les meilleurs 3es, puis cliquez pour faire avancer les pays.</p>
 </div>
 
+
+<div class="wc-random-bar">
+<button class="wc-random-btn" onclick="WC.randomFill()">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+Remplir aléatoirement (test)
+</button>
+</div>
 
 <div id="wc-groups-section" class="wc-section">
 <div class="wc-section-title">Phase de groupes — Cliquez pour classer 1er, 2e, 3e, 4e</div>
@@ -794,7 +804,38 @@ a.click();
 finally{btn.innerHTML=origTxt;btn.disabled=false;}
 }
 
-window.WC={select:selectWinner,selectWinner:selectWinner,clickCircle:clickCircle,advance:advance,reset:reset,downloadImage:downloadImage};
+/* Random fill for testing */
+function shuffle(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
+function randomFill(){
+// 1. Randomly rank all groups
+groupRanks={};best3={};thirdAlloc={};winners={};
+var grpKeys=Object.keys(G);
+grpKeys.forEach(function(g){groupRanks[g]=shuffle(G[g].slice());});
+// 2. Select 8 random groups for best-3
+var shuffledGrps=shuffle(grpKeys.slice());
+shuffledGrps.slice(0,8).forEach(function(g){best3[g]=true;});
+// Retry until allocation succeeds
+var tries=0;
+while(!allocateThirds()&&tries++<50){
+best3={};shuffle(shuffledGrps).slice(0,8).forEach(function(g){best3[g]=true;});}
+// 3. Render groups+best3 first so getR32Team works
+renderAll();
+// 4. Pick R32 winners (49-64)
+[49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64].forEach(function(mid){
+var ta=getR32Team(mid,'a'),tb=getR32Team(mid,'b');
+var w=Math.random()<.5?ta:tb;if(w)winners[mid]=w;});
+// 5. Pick R16 winners (65-72)
+[65,66,67,68,69,70,71,72].forEach(function(mid){
+var ta=getTeam(mid,'a'),tb=getTeam(mid,'b');
+var w=Math.random()<.5?ta:tb;if(w)winners[mid]=w;});
+// 6. QF (73-76), SF (77-78), Final (80)
+[73,74,75,76,77,78,80].forEach(function(mid){
+var ta=getTeam(mid,'a'),tb=getTeam(mid,'b');
+var w=Math.random()<.5?ta:tb;if(w)winners[mid]=w;});
+renderAll();
+}
+
+window.WC={select:selectWinner,selectWinner:selectWinner,clickCircle:clickCircle,advance:advance,reset:reset,downloadImage:downloadImage,randomFill:randomFill};
 
 /* Share buttons */
 (function(){
