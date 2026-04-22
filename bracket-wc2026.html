@@ -839,7 +839,8 @@ window.WC={select:selectWinner,selectWinner:selectWinner,clickCircle:clickCircle
 
 /* Share buttons */
 (function(){
-var shareUrl=document.referrer||window.location.href;
+var params=new URLSearchParams(window.location.search);
+var shareUrl=params.get('page')||document.referrer||window.location.href;
 var url=encodeURIComponent(shareUrl);
 var txt=encodeURIComponent('Mon pronostic pour la Coupe du Monde FIFA 2026 🏆');
 document.getElementById('wc-share-x').href='https://twitter.com/intent/tweet?text='+txt+'&url='+url;
