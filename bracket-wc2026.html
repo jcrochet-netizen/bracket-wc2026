@@ -840,6 +840,7 @@ window.WC={select:selectWinner,selectWinner:selectWinner,clickCircle:clickCircle
 /* Share buttons */
 (function(){
 function getShareUrl(){
+try{var p=new URLSearchParams(window.location.search).get('page');if(p)return p;}catch(e){}
 try{var u=window.top.location.href;if(u)return u;}catch(e){}
 return document.referrer||window.location.href;
 }
