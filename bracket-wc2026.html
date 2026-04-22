@@ -838,25 +838,12 @@ renderAll();
 window.WC={select:selectWinner,selectWinner:selectWinner,clickCircle:clickCircle,advance:advance,reset:reset,downloadImage:downloadImage,randomFill:randomFill};
 
 /* Share buttons */
-var _wcParentUrl=null;
-window.addEventListener('message',function(e){
-if(e.data&&e.data.type==='wc2026-url'){_wcParentUrl=e.data.url;}
-});
-function _wcGetShareUrl(cb){
-var params=new URLSearchParams(window.location.search);
-var fallback=params.get('page')||document.referrer||window.location.href;
-if(_wcParentUrl){cb(_wcParentUrl);return;}
-var done=false;
-var handler=function(e){
-if(e.data&&e.data.type==='wc2026-url'){
-done=true;_wcParentUrl=e.data.url;
-window.removeEventListener('message',handler);cb(e.data.url);}};
-window.addEventListener('message',handler);
-try{window.parent.postMessage({type:'wc2026-getUrl'},'*');}catch(e){}
-setTimeout(function(){if(!done){window.removeEventListener('message',handler);cb(fallback);}},400);
+function _wcGetShareUrl(){
+try{var u=window.top.location.href;if(u)return u;}catch(e){}
+return document.referrer||window.location.href;
 }
 function _wcShare(type){
-_wcGetShareUrl(function(shareUrl){
+var shareUrl=_wcGetShareUrl();
 var url=encodeURIComponent(shareUrl);
 var txt=encodeURIComponent('Mon pronostic pour la Coupe du Monde FIFA 2026 🏆');
 var href='';
@@ -865,7 +852,6 @@ else if(type==='fb')href='https://www.facebook.com/sharer/sharer.php?u='+url;
 else if(type==='wa')href='https://wa.me/?text='+txt+'%20'+url;
 else if(type==='mail')href='mailto:?subject='+txt+'&body='+txt+'%20'+url;
 if(href)window.open(href,'_blank','noopener');
-});
 }
 window.WC.share=_wcShare;
 
