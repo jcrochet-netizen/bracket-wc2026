@@ -859,7 +859,9 @@ var _parentUrl=null;
 window.addEventListener('message',function(e){
 if(e.data&&e.data.type==='wc2026-url'&&e.data.url)_parentUrl=e.data.url;
 });
-try{window.parent.postMessage({type:'wc2026-getUrl'},'*');}catch(e){}
+function _askParentUrl(){try{window.parent.postMessage({type:'wc2026-getUrl'},'*');}catch(e){}}
+_askParentUrl();
+var _askCount=0,_askTimer=setInterval(function(){if(_parentUrl||++_askCount>=10)clearInterval(_askTimer);else _askParentUrl();},300);
 function getShareUrl(){
 if(_parentUrl)return _parentUrl;
 try{
