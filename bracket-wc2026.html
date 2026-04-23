@@ -855,7 +855,13 @@ window.WC={select:selectWinner,selectWinner:selectWinner,clickCircle:clickCircle
 
 /* Share buttons */
 (function(){
+var _parentUrl=null;
+window.addEventListener('message',function(e){
+if(e.data&&e.data.type==='wc2026-url'&&e.data.url)_parentUrl=e.data.url;
+});
+try{window.parent.postMessage({type:'wc2026-getUrl'},'*');}catch(e){}
 function getShareUrl(){
+if(_parentUrl)return _parentUrl;
 try{
 if(window.top&&window.top!==window.self&&window.top.location.href){
 return window.top.location.href;
