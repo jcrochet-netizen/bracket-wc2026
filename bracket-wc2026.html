@@ -704,17 +704,12 @@ renderAll();
 /* Init */
 renderAll();
 
-/* Download bracket as PNG image */
-async function downloadImage(){
-var btn=document.getElementById('wc-dl-btn');
-var origTxt=btn.innerHTML;
-btn.innerHTML='<svg class="wc-share-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg> Génération en cours…';
-btn.disabled=true;
-try{
+/* Generate bracket PNG — returns a data URL */
+async function generateImageDataUrl(){
 var svgEl=document.querySelector('#wc-bracket svg');
-if(!svgEl){alert('Le bracket n\'est pas encore disponible.');return;}
+if(!svgEl)throw new Error('Bracket non disponible');
 var clone=svgEl.cloneNode(true);
-// Fetch all flag images and embed as data URLs
+// Embed flags as data URLs
 var imgs=Array.from(clone.querySelectorAll('image'));
 await Promise.all(imgs.map(async function(img){
 var href=img.getAttribute('href')||img.getAttribute('xlink:href');
@@ -728,7 +723,7 @@ img.setAttribute('href',dataUrl);
 }));
 var vb=svgEl.viewBox.baseVal;
 var W=vb.width,H=vb.height;
-var PAD=16,HDR=90;
+var PAD=16,HDR=85;
 var TW=W+PAD*2;
 var canvas=document.createElement('canvas');
 var DPR=2;
@@ -736,37 +731,18 @@ canvas.width=TW*DPR;
 canvas.height=(H+PAD*2+HDR)*DPR;
 var ctx=canvas.getContext('2d');
 ctx.scale(DPR,DPR);
-// White background
 ctx.fillStyle='#fff';
 ctx.fillRect(0,0,TW,H+PAD*2+HDR);
-// Load TM logo from header img element
-var logoSize=52;
-var logoImg=null;
-try{
-var hdrImg=document.querySelector('.wc-hdr-right img');
-var logoSrc=hdrImg?hdrImg.src:'';
-if(logoSrc){
-logoImg=await new Promise(function(res){
-var i=new Image();i.crossOrigin='anonymous';
-i.onload=function(){res(i);};i.onerror=function(){res(null);};
-i.src=logoSrc+'?cb='+Date.now();
-});
-}
-}catch(e){}
-// Draw header title: "COUPE DU MONDE " + "FIFA 2026™"
+// Header: "COUPE DU MONDE FIFA 2026™"
 ctx.textBaseline='middle';
-ctx.textAlign='left';
-var titleFont='bold 20px "Segoe UI",Arial,sans-serif';
-ctx.font=titleFont;
-var p1='COUPE DU MONDE ';var p2='FIFA 2026™';
-var w1=ctx.measureText(p1).width,w2=ctx.measureText(p2).width;
-var gap=10;
-var titleBlockW=w1+w2+(logoImg?gap+logoSize:0);
-var titleX=(TW-titleBlockW)/2;
 var titleY=22;
+ctx.font='bold 20px "Segoe UI",Arial,sans-serif';
+var p1='COUPE DU MONDE ';var p2='FIFA 2026\u2122';
+var w1=ctx.measureText(p1).width;
+var titleX=(TW-ctx.measureText(p1+p2).width)/2;
+ctx.textAlign='left';
 ctx.fillStyle='#000';ctx.fillText(p1,titleX,titleY);
 ctx.fillStyle='#e2b714';ctx.fillText(p2,titleX+w1,titleY);
-if(logoImg)ctx.drawImage(logoImg,titleX+w1+w2+gap,titleY-logoSize/2,logoSize,logoSize);
 // Subtitle line 1
 ctx.font='13px "Segoe UI",Arial,sans-serif';
 ctx.fillStyle='#000';ctx.textAlign='center';
@@ -774,7 +750,7 @@ ctx.fillText('Canada \u00b7 Mexique \u00b7 \u00c9tats-Unis \u2014 11 juin au 19 
 // Subtitle line 2 (italic)
 ctx.font='italic 13px "Segoe UI",Arial,sans-serif';
 ctx.fillText('Classez chaque groupe, choisissez les meilleurs 3es, puis cliquez pour faire avancer les pays.',TW/2,titleY+52);
-// SVG bracket
+// Draw SVG bracket
 var serializer=new XMLSerializer();
 var svgStr=serializer.serializeToString(clone);
 var svgBlob=new Blob([svgStr],{type:'image/svg+xml;charset=utf-8'});
@@ -785,10 +761,20 @@ image.onload=function(){ctx.drawImage(image,PAD,PAD+HDR,W,H);URL.revokeObjectURL
 image.onerror=reject;
 image.src=url;
 });
-// Download
+return canvas.toDataURL('image/png');
+}
+
+/* Download bracket as PNG */
+async function downloadImage(){
+var btn=document.getElementById('wc-dl-btn');
+var origTxt=btn.innerHTML;
+btn.innerHTML='<svg class="wc-share-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg> Génération en cours…';
+btn.disabled=true;
+try{
+var dataUrl=await generateImageDataUrl();
 var a=document.createElement('a');
 a.download='bracket-wc2026.png';
-a.href=canvas.toDataURL('image/png');
+a.href=dataUrl;
 a.click();
 }catch(e){alert('Erreur lors de la génération : '+e.message);}
 finally{btn.innerHTML=origTxt;btn.disabled=false;}
@@ -844,7 +830,15 @@ Object.keys(links).forEach(function(id){
 var el=document.getElementById(id);
 if(!el)return;
 el.addEventListener('click',function(){
+// 1. Update href for share URL (native <a> opens it immediately)
 this.href=links[id](encodeURIComponent(getShareUrl()));
+// 2. Download image in background
+generateImageDataUrl().then(function(dataUrl){
+var a=document.createElement('a');
+a.download='bracket-wc2026.png';
+a.href=dataUrl;
+a.click();
+}).catch(function(){});
 });
 });
 }());
