@@ -843,17 +843,15 @@ window.WC={select:selectWinner,selectWinner:selectWinner,clickCircle:clickCircle
 
 /* Share buttons */
 (function(){
-// Pre-fetch parent URL via postMessage on load
-var _parentUrl=null;
-window.addEventListener('message',function(e){
-if(e.data&&e.data.type==='wc2026-url'&&e.data.url)_parentUrl=e.data.url;
-});
-try{window.parent.postMessage({type:'wc2026-getUrl'},'*');}catch(e){}
-
 function getShareUrl(){
-if(_parentUrl)return _parentUrl;
-try{var u=window.top.location.href;if(u)return u;}catch(e){}
-return document.referrer||window.location.href;
+try{
+if(window.top&&window.top!==window.self&&window.top.location.href){
+return window.top.location.href;
+}
+}catch(e){
+if(document.referrer)return document.referrer;
+}
+return window.location.href;
 }
 var txt=encodeURIComponent('Découvrez mon bracket complet de la Coupe du Monde FIFA 2026 🏆 ! Les résultats des groupes et jusqu\'à la finale.');
 var links={
